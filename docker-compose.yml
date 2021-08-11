@@ -1,0 +1,23 @@
+version: "3"
+services:
+
+  php7_www:
+    build: ./php7
+    container_name: php7_docker
+    volumes:
+      - ./www:/var/www/html/public
+      - ~/.ssh:/root/.ssh
+    ports:
+      - "80:80"
+    environment:
+      WEB_DOCUMENT_ROOT: /var/www/html/public
+
+  mysql:
+    container_name: mariadb_docker
+    image: "mariadb:10.6"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+    ports:
+      - "3306:3306"
